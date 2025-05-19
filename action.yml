@@ -1,0 +1,25 @@
+name: 'Lean release tagging'
+description: 'Creates a Git tag whenever your project updates to a new Lean release.'
+inputs:
+  before:
+    description: 'Commit hash of the most recent commit before the push. When in doubt, set this to the value of github.event.before.'
+    required: true
+  after:
+    description: 'Commit hash of the most recent commit after the push. When in doubt, set this to the value of github.event.after.'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout the repository
+      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      with:
+        # We set infinite fetch depth, for now, because we can't tell how many revisions are between
+        # `before` and `after` before actually accessing the repo.
+        fetch-depth: 0
+
+    - name: Run the script
+      run: ${{ github.action_path }}/create-tags.sh
+      shell: bash
+      env:
+        BEFORE: ${{ inputs.before }}
+        AFTER: ${{ inputs.after }}
