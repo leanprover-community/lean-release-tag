@@ -27,3 +27,7 @@ jobs:
         before: ${{ github.event.before }}
         after: ${{ github.event.after }}
 ```
+
+## Testing
+
+To semi-manually test this action, run the `test-me.sh` script. This will make some example commits to the repository. Please verify that the corresponding tags have been created correctly.
