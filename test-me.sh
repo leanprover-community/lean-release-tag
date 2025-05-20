@@ -56,7 +56,11 @@ git push
 echo "leanprover/lean4:v4.$RANDOM.0" > lean-toolchain
 echo >> lean-toolchain
 git add lean-toolchain
-git commit -m "Testing newlines"
+git commit -m "Testing with newlines"
+# Test with no newline at the end of the file.
+echo -n "leanprover/lean4:v4.$RANDOM.0" > lean-toolchain
+git add lean-toolchain
+git commit -m "Testing with no newlines"
 git push
 
 # Back to original branch.
