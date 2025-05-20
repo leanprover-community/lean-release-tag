@@ -14,7 +14,7 @@ jobs:
       contents: write
     steps:
     - name: lean-release-tag action
-      uses: leanprover-community/lean-release-tag@001bf971d3f9c445468237ee487f26ea9e85bf35
+      uses: leanprover-community/lean-release-tag@6cac285cc62ca3c14a396be0945cdf06e3ac8593
       with:
         before: ${{ github.event.before }}
         after: ${{ github.event.after }}
