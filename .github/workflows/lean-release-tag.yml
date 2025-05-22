@@ -14,10 +14,9 @@ jobs:
       contents: write
     steps:
     - name: lean-release-tag action
-      uses: leanprover-community/lean-release-tag@cd9ace2119a521d567bf0659eb6c5cb449461981
+      uses: leanprover-community/lean-release-tag@f21a6eedf2ee1299214bd045fde3ad9a7f61e606
       with:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         before: ${{ github.event.before }}
         after: ${{ github.event.after }}
 
-        do-release: true
