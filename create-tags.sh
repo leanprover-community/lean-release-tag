@@ -22,8 +22,10 @@ for commit in $commits; do
   if git ls-remote --tags --exit-code origin "$toolchain_version" >/dev/null; then
     echo "INFO: Already have a tag for $toolchain_version; not tagging commit: $commit"
   else
+    git config user.name "github-actions[bot]"
+    git config user.email "github-actions[bot]@users.noreply.github.com"
     # If the tag does not exist, create and push the tag to remote
-    git tag "$toolchain_version"
+    git tag -a "$toolchain_version" -m "Release $toolchain_version"
     git push origin  "$toolchain_version"
   fi
 done
