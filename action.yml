@@ -7,6 +7,10 @@ inputs:
   after:
     description: 'Commit hash of the most recent commit after the push. When in doubt, set this to the value of github.event.after.'
     required: true
+  do-release:
+    description: 'Whether to create a GitHub release for the new tag. Allowed values: `true` and `false`. Default value: `false`.'
+    required: false
+    default: false
 runs:
   using: "composite"
   steps:
@@ -23,3 +27,5 @@ runs:
       env:
         BEFORE: ${{ inputs.before }}
         AFTER: ${{ inputs.after }}
+        DO_RELEASE: ${{ inputs.do-release }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
