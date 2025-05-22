@@ -19,3 +19,4 @@ jobs:
         before: ${{ github.event.before }}
         after: ${{ github.event.after }}
 
+        do-release: true
