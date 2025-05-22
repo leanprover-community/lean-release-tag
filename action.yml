@@ -1,6 +1,9 @@
 name: 'Lean release tagging'
 description: 'Creates a Git tag whenever your project updates to a new Lean release.'
 inputs:
+  GH_TOKEN:
+    description: 'Token used to access the GitHub API. When in doubt, set this to the value of secrets.GH_TOKEN.'
+    required: true
   before:
     description: 'Commit hash of the most recent commit before the push. When in doubt, set this to the value of github.event.before.'
     required: true
@@ -25,7 +28,7 @@ runs:
       run: ${{ github.action_path }}/create-tags.sh
       shell: bash
       env:
+        GH_TOKEN: ${{ inputs.GH_TOKEN }}
         BEFORE: ${{ inputs.before }}
         AFTER: ${{ inputs.after }}
         DO_RELEASE: ${{ inputs.do-release }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

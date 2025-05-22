@@ -32,6 +32,7 @@ jobs:
     - name: lean-release-tag action
       uses: leanprover-community/lean-release-tag@$revision_to_test
       with:
+        GH_TOKEN: \${{ secrets.GH_TOKEN }}
         before: \${{ github.event.before }}
         after: \${{ github.event.after }}
 " > .github/workflows/lean-release-tag.yml
