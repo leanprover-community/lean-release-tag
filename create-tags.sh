@@ -27,5 +27,9 @@ for commit in $commits; do
     # If the tag does not exist, create and push the tag to remote
     git tag -a "$toolchain_version" -m "Release $toolchain_version"
     git push origin  "$toolchain_version"
+
+    if [[ "$DO_RELEASE" == "true" ]]; then
+      gh release create "$toolchain_version" --title "$toolchain_version" --notes "Automated release for Lean version $toolchain_version"
+    fi
   fi
 done

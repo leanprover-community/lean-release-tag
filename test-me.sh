@@ -63,5 +63,13 @@ git add lean-toolchain
 git commit -m "Testing with no newlines"
 git push
 
+# Test making a release.
+echo "        do-release: true" >> .github/workflows/lean-release-tag.yml
+git add .github/workflows/lean-release-tag.yml
+echo "leanprover/lean4:v4.$RANDOM.0" > lean-toolchain
+git add lean-toolchain
+git commit -m "Releasing..."
+git push
+
 # Back to original branch.
 git checkout main
