@@ -24,17 +24,11 @@ jobs:
     - name: lean-release-tag action
       uses: leanprover-community/lean-release-tag
       with:
-        before: ${{ github.event.before }}
-        after: ${{ github.event.after }}
         do-release: true
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ## Configuration
-
-### Inputs: `before` and `after`
-
-These are the commit hashes of the most recent commit before and after the push, respectively. Any new Lean versions between `before` (exclusive) and `after` (inclusive) will get a tag. When in doubt, set these to the values of `github.event.before` and `github.event.after`, respectively.
 
 ### Inputs: `do-release`
 
@@ -43,6 +37,10 @@ This determines whether to create a GitHub release for the new tag. Allowed valu
 ### Inputs: `GITHUB_TOKEN`
 
 This is the token used to access the GitHub API. The token is required to make releases. When in doubt, set this to the value of `secrets.GITHUB_TOKEN`.
+
+### Inputs: `before` and `after`
+
+These are the commit hashes of the most recent commit before and after the push, respectively. Any new Lean versions between `before` (exclusive) and `after` (inclusive) will get a tag. If this action runs on `push` (as in the expected configuration), you do not need to set these.
 
 ## Testing
 
