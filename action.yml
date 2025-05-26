@@ -4,6 +4,14 @@ inputs:
   GITHUB_TOKEN:
     description: 'Token used to access the GitHub API. When in doubt, set this to the value of secrets.GITHUB_TOKEN.'
     required: true
+  before:
+    description: 'Commit hash of the most recent commit before the push. Unless you know what you are doing, you do not need to change this.'
+    required: false
+    default: ${{ github.event.before }}
+  after:
+    description: 'Commit hash of the most recent commit after the push. Unless you know what you are doing, you do not need to change this.'
+    required: false
+    default: ${{ github.event.after }}
   do-release:
     description: 'Whether to create a GitHub release for the new tag. Allowed values: `true` and `false`. Default value: `false`.'
     required: false
@@ -23,6 +31,6 @@ runs:
       shell: bash
       env:
         GH_TOKEN: ${{ inputs.GITHUB_TOKEN }}
-        BEFORE: ${{ github.event.before }}
-        AFTER: ${{ github.event.after }}
+        BEFORE: ${{ inputs.before }}
+        AFTER: ${{ inputs.after }}
         DO_RELEASE: ${{ inputs.do-release }}
