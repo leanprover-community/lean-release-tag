@@ -33,8 +33,6 @@ jobs:
       uses: leanprover-community/lean-release-tag@$revision_to_test
       with:
         GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
-        before: \${{ github.event.before }}
-        after: \${{ github.event.after }}
 " > .github/workflows/lean-release-tag.yml
 git add .github/workflows/lean-release-tag.yml
 
