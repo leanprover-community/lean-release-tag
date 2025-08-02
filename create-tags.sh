@@ -25,7 +25,7 @@ for commit in $commits; do
     git config user.name "github-actions[bot]"
     git config user.email "github-actions[bot]@users.noreply.github.com"
     # If the tag does not exist, create and push the tag to remote
-    git tag -a "$toolchain_version" -m "Release $toolchain_version"
+    git tag -a "$toolchain_version" -m "Release $toolchain_version" $commit
     git push origin  "$toolchain_version"
 
     if [[ "$DO_RELEASE" == "true" ]]; then
