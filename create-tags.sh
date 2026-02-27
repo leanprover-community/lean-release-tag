@@ -3,7 +3,12 @@
 set -euo pipefail
 
 # The commits that touch the lean toolchain, oldest first.
-commits=$(git log --reverse --pretty=format:"%H" $BEFORE..$AFTER -- lean-toolchain)
+# On the initial push to a new repo, BEFORE is the null SHA.
+if [[ "$BEFORE" == "0000000000000000000000000000000000000000" ]]; then
+  commits=$(git log --reverse --pretty=format:"%H" $AFTER -- lean-toolchain)
+else
+  commits=$(git log --reverse --pretty=format:"%H" $BEFORE..$AFTER -- lean-toolchain)
+fi
 for commit in $commits; do
   # Get the toolchain that this PR switched to.
   toolchain=$(git show $commit:lean-toolchain) || {
