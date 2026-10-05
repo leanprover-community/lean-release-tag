@@ -27,7 +27,13 @@ runs:
         fetch-depth: 0
 
     - name: Run the script
-      run: ${{ github.action_path }}/create-tags.sh
+      run:  |
+        # Automatically configure gh CLI for GitHub Enterprise Server
+        if [[ -n "$GITHUB_SERVER_URL" && "$GITHUB_SERVER_URL" != "https://github.com" ]]; then
+          export GH_HOST="${GITHUB_SERVER_URL#*://}"
+          export GH_ENTERPRISE_TOKEN="${GH_TOKEN}"
+        fi
+        ${{ github.action_path }}/create-tags.sh
       shell: bash
       env:
         GH_TOKEN: ${{ inputs.GITHUB_TOKEN }}
